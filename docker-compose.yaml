@@ -38,4 +38,16 @@ services:
       - POSTGRES_DB=zabbix
     depends_on:
       - zabbix-server
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana-storage:/var/lib/grafana
+    depends_on:
+      - zabbix-server
 
